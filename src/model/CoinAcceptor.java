@@ -7,27 +7,31 @@ public class CoinAcceptor implements PaymentAcceptor {
         this.amount = amount;
     }
 
+    @Override
+    public boolean authentication() {
+        return true;
+    }
+
+    @Override
+    public int getAmount() {
+        return amount;
+    }
+
     public void setAmount(int amount) {
         this.amount = amount;
     }
 
     @Override
-    public boolean authentication() {
-        return false;
-    }
-
-    @Override
-    public int getAmount() {
-        return 0;
-    }
-
-    @Override
     public void addAmount() {
-
+        setAmount(amount + 10);
     }
 
     @Override
-    public boolean deductAmount(int amount) {
+    public boolean deductAmount(int price) {
+        if (this.amount >= amount){
+            setAmount(amount - price);
+            return true;
+        }
         return false;
     }
 }
